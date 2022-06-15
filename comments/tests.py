@@ -18,3 +18,13 @@ class CreateCommentTest(TestCase):
     def test_should_resolve_comment_new(self):
         found = resolve("/comments/new/")
         self.assertEqual(comment_new, found.func)
+
+class CommentDetailTest(TestCase):
+    def test_should_resolve_comment_detail(self):
+        found = resolve("/comments/1/")
+        self.assertEqual(comment_detail, found.func)
+
+class EditCommentTest(TestCase):
+    def test_should_resolve_comment_edit(self):
+        found = resolve("/comments/1/edit/")
+        self.assertEqual(comment_edit, found.func)
