@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emox</title>
+</head>
+<body>
+    <h1>ようこそEmox_Appへ</h1>
+    <h2>コメント一覧</h2>
+    {% if comments %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>投稿者</th>
+                <th>投稿日</th>
+                <th>感情</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <th>{{ comment.created_by.username }}</th>
+                <th>{{ comment.created_at }}</th>
+                
+                <th><a href="{% url 'comment_detail' comment.id %}">{{ comment.emotion }}</a></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>コメントはまだ投稿されていません</p>
+    {% endif %}
+</body>
+</html>

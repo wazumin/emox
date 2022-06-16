@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Comment
 # Create your views here.
 
 def top(request):
-    return HttpResponse("Hello World")
+    comments = Comment.objects.all()
+    context = {"comments": comments}
+    return render(request, "comments/top.html", context)
 
 def comment_new(request):
     return HttpResponse('コメントの登録')
