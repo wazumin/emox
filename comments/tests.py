@@ -5,6 +5,7 @@ from django.urls import resolve
 from .views import *
 from .models import Comment
 
+
 UserModel = get_user_model()
 
 # Create your tests here.
@@ -27,11 +28,6 @@ class CreateCommentTest(TestCase):
         self.client.post("/comment/new/", data)
         comment = Comment.objects.get(emotion='感情')
         self.assertEqual('詳細', comment.description)
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ('emotion', 'description')
 
 class CommentDetailTest(TestCase):
     def setUp(self):
