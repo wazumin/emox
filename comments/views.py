@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponse
 from .models import Comment
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
@@ -13,7 +13,7 @@ def top(request):
 
 @login_required
 def comment_new(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
@@ -35,9 +35,9 @@ def comment_edit(request, comment_id):
         if form.is_valid():
             form.save()
             return redirect('comment_detail', comment_id=comment_id)
-        else:
-            form = CommentForm(instance=comment)
-        return render(request, 'comments/comment_edit.html', {'form', form})
+    else:
+        form = CommentForm(instance=comment)
+    return render(request, 'comments/comment_edit.html', {'form': form})
 
 def comment_detail(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
