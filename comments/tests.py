@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client, RequestFactory
 from django.urls import resolve
@@ -8,12 +9,36 @@ UserModel = get_user_model()
 
 # Create your tests here.
 
+class CreateCommentTest(TestCase):
+    def setUp(self):
+        self.user = UserModel.objects.create(
+            username="test_user",
+            email="test@example.com",
+            password="secret",
+        )
+        self.client.force_login(self.user)
+    
+    def test_render_creation_form(self):
+        response = self.client.get("/comment/new/")
+        self.assertContains(response, "コメントの登録", status_code=200)
+    
+    def test_create_comment(self):
+        data = {'emotion': '感情', 'description': '詳細'}
+        self.client.post("/comment/new/", data)
+        comment = Comment.objects.get(emotion='感情')
+        self.assertEqual('詳細', comment.description)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('emotion', 'description')
+
 class CommentDetailTest(TestCase):
     def setUp(self):
         self.user = UserModel.objects.create(
             username="test_user",
             email="test@example.com",
-            password="top_secret_pass0001",
+            password="secret",
         )
         self.comment = Comment.objects.create(
             emotion="感情",
