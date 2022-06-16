@@ -8,6 +8,27 @@ UserModel = get_user_model()
 
 # Create your tests here.
 
+class CommentDetailTest(TestCase):
+    def setUp(self):
+        self.user = UserModel.objects.create(
+            username="test_user",
+            email="test@example.com",
+            password="top_secret_pass0001",
+        )
+        self.comment = Comment.objects.create(
+            emotion="感情",
+            description="詳細",
+            created_by=self.user
+        )
+
+    def test_should_use_expected_template(self):
+        response = self.client.get("/comments/%s/" % self.comment.id)
+        self.assertTemplateUsed(response, "comments/comment_detail.html_")
+    
+    def test_top_page_return_200_and_expected_heading(self):
+        response = self.client.get("/comments/%s/" % self.comment.id)
+        self.assertContains(response, self.comment.emotion, status_code=200)
+
 class TopPageRenderCommentsTest(TestCase):
     def setUp(self):
         self.user = UserModel.objects.create(
