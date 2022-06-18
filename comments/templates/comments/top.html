@@ -1,54 +1,32 @@
-{% load static %}
-{% load django_bootstrap5 %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emox</title>
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <link rel="stylesheet" href="{% static 'comments/css/style.css' %}">
-</head>
-<body>
-<nav class="navbar navbar-expand flex-md-row navbar-dark bg-dark">
-    <div class="container justify-content-between">
-        <a href="/" class="navbar-brand">Emox</a>
-    </div>
-</nav>
-<main>
-    <div class="container">
-        <div class="welcome">
-            <h1>ようこそEmox_Appへ</h1>
-            <p class="subtitle">あなたの感情を共有しましょう</p>
-            <p class="btn btn-primary" href="{% url 'comment_new' %}">コメントを作成する</p>
-        </div>
-        <!-- <h2>コメント一覧</h2> -->
-        {% if comments %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>投稿者</th>
-                    <th>投稿日</th>
-                    <th>感情</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for comment in comments %}
-                <tr>
-                    <th>{{ comment.created_by.username }}</th>
-                    <th>{{ comment.created_at }}</th>
-                    
-                    <th><a href="{% url 'comment_detail' comment.id %}">{{ comment.emotion }}</a></th>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>コメントはまだ投稿されていません</p>
-        {% endif %}
-    </div>
-</main>
-</body>
-</html>
+{% extends "base.html" %}
+
+<div class="welcome">
+    <h1>ようこそEmox_Appへ</h1>
+    <p class="subtitle">あなたの感情を共有しましょう</p>
+    <p class="btn btn-primary" href="{% url 'comment_new' %}">コメントを作成する</p>
+</div>
+<!-- <h2>コメント一覧</h2> -->
+{% if comments %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>投稿者</th>
+            <th>投稿日</th>
+            <th>感情</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in comments %}
+        <tr>
+            <th>{{ comment.created_by.username }}</th>
+            <th>{{ comment.created_at }}</th>
+            <th><a href="{% url 'comment_detail' comment.id %}">{{ comment.emotion }}</a></th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>コメントはまだ投稿されていません</p>
+{% endif %}
+
+
