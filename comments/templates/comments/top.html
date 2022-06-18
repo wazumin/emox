@@ -1,3 +1,4 @@
+{% load static %}
 {% load django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="ja">
@@ -8,6 +9,7 @@
     <title>Emox</title>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'comments/css/style.css' %}">
 </head>
 <body>
 <nav class="navbar navbar-expand flex-md-row navbar-dark bg-dark">
