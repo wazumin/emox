@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My Apps
     'comments.apps.CommentsConfig',
+    # UI
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
