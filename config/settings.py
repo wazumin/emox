@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'comments.apps.CommentsConfig',
     # UI
     'django_bootstrap5',
+    'pygments_renderer',
 ]
 
 MIDDLEWARE = [

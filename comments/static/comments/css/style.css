@@ -10,3 +10,18 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+/* .comment-date {
+    margin-bottom: 1rem;
+} */
+
+/* .source-code > .highlight {
+    padding: 1rem;
+    margin-bottom: 1rem;
+} */
+
+.comment {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    background-color: #eee;
+}
