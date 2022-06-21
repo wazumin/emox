@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My Apps
     'comments.apps.CommentsConfig',
+    'accounts.apps.AccountsConfig',
     # UI
     'django_bootstrap5',
     'pygments_renderer',
