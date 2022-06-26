@@ -25,3 +25,7 @@ main {
     margin-bottom: 2rem;
     background-color: #eee;
 }
+
+li {
+    display: inline;
+}
